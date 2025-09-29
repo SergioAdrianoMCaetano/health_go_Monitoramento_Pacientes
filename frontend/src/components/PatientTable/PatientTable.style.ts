@@ -4,8 +4,10 @@ export const Table = styled.table`
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 2rem;
+    font-size: 1rem;
 
-    th, td {
+    th,
+    td {
         padding: 0.8rem;
         border: 1px solid #ccc;
         text-align: left;
@@ -14,8 +16,26 @@ export const Table = styled.table`
     th {
         background-color: #f0f0f0;
     }
-    `;
 
-    export const Row = styled.tr<{ alert: boolean }>`
+    @media (max-width: 480px) {
+        font-size: 0.85rem;
+
+        th,
+        td {
+        padding: 0.6rem;
+        }
+    }
+
+    @media (min-width: 481px) and (max-width: 767px) {
+        font-size: 0.9rem;
+
+        th,
+        td {
+        padding: 0.7rem;
+        }
+    }
+`;
+
+export const Row = styled.tr<{ alert: boolean }>`
     background-color: ${({ alert }) => (alert ? "#ffe5e5" : "#fff")};
 `;

@@ -16,7 +16,6 @@ def list_uploaded_files():
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-
 @router.post("/csv")
 async def upload_csv(file: UploadFile = File(...)):
     try:
@@ -38,7 +37,8 @@ async def upload_csv(file: UploadFile = File(...)):
             "filename": file.filename,
             "records_processed": len(df),
             "records_saved": records_saved,
-            "saved_path": file_path
+            "saved_path": file_path,
+            "data": df.to_dict(orient="records")  # Retorna os dados para visualização imediata
         })
 
     except Exception as e:

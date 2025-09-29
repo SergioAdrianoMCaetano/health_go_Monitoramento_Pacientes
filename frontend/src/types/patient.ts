@@ -1,13 +1,14 @@
 export interface PatientRecord {
     timestamp: string;
-    paciente_id: string;
-    paciente_nome: string;
-    paciente_cpf: string;
-    hr: number;
+    patient_id: string;
+    patient_name: string;
+    patient_cpf: string;
+    heart_rate: number;
     spo2: number;
-    pressao_sys: number;
-    pressao_dia: number;
-    temp: number;
-    ["res p_freq"]: number;
-    status: string;
+    bp_sys: number;
+    bp_dia: number;
+    temperature: number;
+    resp_rate: number;
+    status: "NORMAL" | "ALERTA";
+    source_file?: string; 
 }
