@@ -28,6 +28,10 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         setState(prev => ({ ...prev, loading }));
     };
 
+    const setError = (error: string | null) => {
+        setState(prev => ({...prev, error}));
+    };
+
     const resetApp = () => {
         setState(initialState);
     };
@@ -39,6 +43,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         setPatientData,
         setValidFile,
         setLoading,
+        setError,
         resetApp,  
     };
 

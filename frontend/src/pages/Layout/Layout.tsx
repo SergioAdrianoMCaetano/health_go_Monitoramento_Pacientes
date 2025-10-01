@@ -1,4 +1,3 @@
-// src/pages/Layout/BaseLayout.tsx
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { LayoutContainer, Header, Nav, Main, Footer } from "./Layout.styles";
@@ -26,7 +25,7 @@ export default function BaseLayout({ children }: BaseLayoutProps) {
         </Main>
 
         <Footer>
-            <p>Sistema de Monitoramento de Pacientes - HealthGo © 2024</p>
+            <p>Sistema de Monitoramento de Pacientes - HealthGo © 2025</p>
         </Footer>
         </LayoutContainer>
     );

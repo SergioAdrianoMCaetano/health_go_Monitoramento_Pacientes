@@ -7,12 +7,10 @@ import { HomeContainer, UploadSection, ValidationMessage, WelcomeSection } from 
 
 export default function HomePage() {
     const navigate = useNavigate();
-    
     const { setValidFile, setLoading, setUploadedFiles } = useApp();
     const { validateFile, validationError, isValidating, clearError } = useFileValidation();
-    
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
-
+    
     const handleFileSelect = (file: File | null) => {
         setSelectedFile(file);
         clearError();

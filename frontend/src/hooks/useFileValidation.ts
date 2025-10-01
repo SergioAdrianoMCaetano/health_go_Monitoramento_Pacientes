@@ -4,7 +4,6 @@ import { csvDataSchema, csvFileSchema } from "../utils/validationSchemas";
 export function useFileValidation() {
     const [validationError, setValidationError] = useState<string | null>(null);
     const [isValidating, setIsValidating] = useState(false);
-
     const validateFile = async (file: File): Promise<boolean> => {
         setIsValidating(true);
         setValidationError(null);

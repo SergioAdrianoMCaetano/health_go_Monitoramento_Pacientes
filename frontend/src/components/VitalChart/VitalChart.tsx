@@ -1,6 +1,7 @@
+// src/components/VitalChart/VitalChart.tsx
+import { useEffect, useState } from "react";
 import Plot from "react-plotly.js";
 import { ChartContainer } from "./VitalChart.styles";
-import { useEffect, useState } from "react";
 import { api } from "../../services/api";
 import PatientSelector from "../PatientSelector/PatientSelector";
 import type { PatientRecord } from "../../types/patient";
@@ -21,6 +22,7 @@ export default function VitalChart({ refresh }: VitalChartProps) {
     }, [refresh]);
 
     const pacientes = [...new Set(data.map((d) => d.patient_name).filter(Boolean))];
+
     const dadosFiltrados = pacienteSelecionado
         ? data.filter((d) => d.patient_name === pacienteSelecionado)
         : data;
@@ -48,7 +50,9 @@ export default function VitalChart({ refresh }: VitalChartProps) {
                 marker: { color: "green" },
             },
             ]}
-            layout={{ title: { text: "Frequência Cardíaca ao Longo do Tempo" } }}
+            layout={{
+            title: { text: "Frequência Cardíaca ao Longo do Tempo" },
+            }}
             style={{ width: "100%" }}
         />
         </ChartContainer>

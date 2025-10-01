@@ -1,89 +1,75 @@
-// src/components/UploadForm/UploadForm.tsx
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useApp } from "../../hooks/useApp";
-import { useFileValidation } from "../../hooks/useFileValidation";
-import { api } from "../../services/api";
+import { useRef, useState } from "react";
+import { FormContainer, Button, HiddenInput, FileName } from "./UpLoadForm.styles";
+import { FaUpload, FaFile } from "react-icons/fa";
 
-export default function UploadForm() {
-  const navigate = useNavigate();
-  const { setValidFile, setUploadedFiles, setLoading } = useApp();
-  const { validateFile, validationError, isValidating, clearError } = useFileValidation();
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+interface UploadFormProps {
+    onFileSelect: (file: File | null) => void;
+    onUpload: () => void;
+    disabled?: boolean;
+}
 
-  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setSelectedFile(e.target.files[0]);
-      clearError();
-    }
-  };
+export default function UploadForm({ onFileSelect, onUpload, disabled = false }: UploadFormProps) {
+    const [file, setFile] = useState<File | null>(null);
+    const fileInputRef = useRef<HTMLInputElement>(null);
+    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const selectedFile = event.target.files?.[0] || null;
+        setFile(selectedFile);
+        onFileSelect(selectedFile);
+    };
 
-  const handleUpload = async (e: React.FormEvent) => {
-    e.preventDefault();
+    const handleUpload = async () => {
+        if (!file) return;
 
-    if (!selectedFile) {
-      alert("Por favor, selecione um arquivo CSV.");
-      return;
-    }
+        const formData = new FormData();
+        formData.append("file", file);
 
-    setLoading(true);
+        try {
+            await fetch("http://localhost:8000/api/upload/csv", {
+                method: "POST",
+                body: formData,
+            });
+            
+            alert("Upload realizado com sucesso!");
+            onUpload();
+        } catch (error) {
+            console.error("❌ Erro no upload:", error);
+            alert("Erro ao fazer upload. Tente novamente.");
+        }
+    };
 
-    try {
-      console.log("🚀 Iniciando validação do arquivo...");
-      const isValid = await validateFile(selectedFile);
+    const handleChooseFile = () => {
+        fileInputRef.current?.click();
+    };
 
-      if (!isValid) {
-        console.error("❌ Validação falhou");
-        return;
-      }
-
-      const formData = new FormData();
-      formData.append("file", selectedFile);
-
-      console.log("📤 Enviando arquivo para a API...");
-      const response = await api.post("/upload/csv", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-
-      if (!response.data || !response.data.success) {
-        throw new Error("Resposta inesperada da API");
-      }
-
-      console.log("✅ Upload concluído:", response.data);
-
-      // Buscar lista atualizada de arquivos
-      const filesResponse = await api.get("/upload/files");
-      if (filesResponse.data?.files) {
-        setUploadedFiles(filesResponse.data.files);
-      }
-
-      // Marcar como válido e redirecionar
-      setValidFile(true);
-      navigate("/dashboard");
-
-    } catch (error) {
-      const errorMsg = error instanceof Error ? error.message : "Erro durante o upload.";
-      alert(errorMsg);
-      console.error("❌ Erro no upload:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  return (
-    <form onSubmit={handleUpload} style={{ marginTop: "2rem" }}>
-      <input type="file" accept=".csv" onChange={handleFileSelect} disabled={isValidating} />
-      <button type="submit" disabled={isValidating || !selectedFile} style={{ marginLeft: "1rem" }}>
-        Enviar e Validar CSV
-      </button>
-
-      <div style={{ marginTop: "1rem", fontSize: "0.9rem" }}>
-        {validationError && <p style={{ color: "red" }}>❌ {validationError}</p>}
-        {isValidating && <p>⏳ Validando arquivo...</p>}
-        {selectedFile && !validationError && !isValidating && (
-          <p style={{ color: "green" }}>✅ Arquivo pronto para envio: {selectedFile.name}</p>
-        )}
-      </div>
-    </form>
-  );
+    return (
+        <FormContainer>
+            <Button 
+                onClick={handleChooseFile}
+                disabled={disabled}
+                type="button"
+            >
+                <FaFile />
+                {file ? "Alterar Arquivo" : "Escolher arquivo"}
+            </Button>
+            
+            <HiddenInput
+                type="file"
+                accept=".csv"
+                ref={fileInputRef}
+                onChange={handleFileChange}
+                disabled={disabled}
+            />
+            
+            <Button 
+                onClick={handleUpload}
+                disabled={!file || disabled}
+                type="button"
+            >
+                <FaUpload />
+                {disabled ? "Enviando..." : "Enviar CSV"}
+            </Button>
+            
+            {file && <FileName>📄 {file.name}</FileName>}
+        </FormContainer>
+    );
 }

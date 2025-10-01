@@ -6,6 +6,7 @@ export interface AppState {
     patientData: PatientRecord[];
     isValidFile: boolean;
     loading: boolean;
+    error: string | null;
 }
 
 export interface AppContextType {
@@ -15,6 +16,7 @@ export interface AppContextType {
     setPatientData: (data: PatientRecord[]) => void;
     setValidFile: (isValid: boolean) => void;
     setLoading: (loading: boolean) => void;
+    setError: (error: string | null) => void;
     resetApp: () => void;
 }
 
@@ -24,4 +26,5 @@ export const initialState: AppState = {
     patientData: [],
     isValidFile: false,
     loading: false,
+    error: null,
 };
