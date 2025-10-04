@@ -51,34 +51,34 @@ export const FileItem = styled.div`
     }
 `;
 
-export const FileButton = styled.button<{ active?: boolean }>`
+export const FileButton = styled.button<{ $active?: boolean }>`
     width: 100%;
     padding: 0.875rem 1rem;
     border: none;
     border-radius: 10px;
-    background: ${props => props.active ? 
+    background: ${props => props.$active ? 
         'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' : 
         '#ffffff'
     };
-    color: ${props => props.active ? 'white' : '#4a5568'};
+    color: ${props => props.$active ? 'white' : '#4a5568'};
     cursor: pointer;
     text-align: left;
     transition: all 0.3s ease;
-    border: 2px solid ${props => props.active ? '#667eea' : '#e2e8f0'};
+    border: 2px solid ${props => props.$active ? '#667eea' : '#e2e8f0'};
     font-size: 0.95rem;
-    font-weight: ${props => props.active ? '600' : '500'};
-    box-shadow: ${props => props.active ? 
+    font-weight: ${props => props.$active ? '600' : '500'};
+    box-shadow: ${props => props.$active ? 
         '0 4px 15px rgba(102, 126, 234, 0.3)' : 
         '0 2px 8px rgba(0, 0, 0, 0.05)'
     };
 
     &:hover {
-        background: ${props => props.active ? 
+        background: ${props => props.$active ? 
             'linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%)' : 
             '#f7fafc'
         };
         transform: translateY(-2px);
-        box-shadow: ${props => props.active ? 
+        box-shadow: ${props => props.$active ? 
             '0 6px 20px rgba(102, 126, 234, 0.4)' : 
             '0 4px 15px rgba(0, 0, 0, 0.1)'
         };
@@ -110,18 +110,18 @@ export const LoadingMessage = styled.div`
     }
 `;
 
-export const EmptyMessage = styled.div<{ error?: boolean }>`
+export const EmptyMessage = styled.div<{ $error?: boolean }>`
     text-align: center;
     padding: 1.5rem 1rem;
-    color: ${props => props.error ? '#e53e3e' : '#718096'};
+    color: ${props => props.$error ? '#e53e3e' : '#718096'};
     font-size: 0.95rem;
     line-height: 1.5;
-    background: ${props => props.error ? '#fed7d7' : '#f7fafc'};
+    background: ${props => props.$error ? '#fed7d7' : '#f7fafc'};
     border-radius: 8px;
-    border: 1px solid ${props => props.error ? '#feb2b2' : '#e2e8f0'};
+    border: 1px solid ${props => props.$error ? '#feb2b2' : '#e2e8f0'};
 
     &::before {
-        content: "${props => props.error ? '❌' : '📝'}";
+        content: "${props => props.$error ? '❌' : '📝'}";
         display: block;
         font-size: 2rem;
         margin-bottom: 0.5rem;

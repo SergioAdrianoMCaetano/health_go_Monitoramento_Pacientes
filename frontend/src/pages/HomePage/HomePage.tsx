@@ -88,7 +88,7 @@ export default function HomePage() {
                 />
 
                 {validationError && (
-                    <ValidationMessage error>
+                    <ValidationMessage $error>
                         ❌ {validationError}
                     </ValidationMessage>
                 )}
@@ -100,7 +100,7 @@ export default function HomePage() {
                 )}
 
                 {selectedFile && !validationError && !isValidating && (
-                    <ValidationMessage success>
+                    <ValidationMessage $success>
                         ✅ Arquivo pronto para envio: {selectedFile.name}
                     </ValidationMessage>
                 )}

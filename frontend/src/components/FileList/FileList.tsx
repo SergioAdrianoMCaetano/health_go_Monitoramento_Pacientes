@@ -71,7 +71,7 @@ export default function FileList({ onFileSelect }: FileListProps) {
         return (
             <FileListContainer>
                 <FileListHeader>Arquivos CSV</FileListHeader>
-                <EmptyMessage error>
+                <EmptyMessage $error>
                     ❌ Erro: {error}
                     <br />
                     <small>Verifique se o backend está rodando na porta 8000</small>
@@ -90,7 +90,7 @@ export default function FileList({ onFileSelect }: FileListProps) {
             <FileItem>
                 <FileButton
                     onClick={handleShowAll}
-                    active={!state.selectedFile}
+                    $active={!state.selectedFile}
                     title="Mostrar todos os arquivos"
                 >
                     📊 Todos os Arquivos
@@ -103,7 +103,7 @@ export default function FileList({ onFileSelect }: FileListProps) {
                     <FileItem key={`${filename}-${index}`}>
                         <FileButton 
                             onClick={() => handleFileClick(filename)}
-                            active={state.selectedFile === filename}
+                            $active={state.selectedFile === filename}
                             title={`Visualizar dados de ${filename}`}
                         >
                             📄 {filename}

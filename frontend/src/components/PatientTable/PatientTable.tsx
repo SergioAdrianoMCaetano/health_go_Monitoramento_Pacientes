@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+// import { useApp } from "../../hooks/useApp";
 import { api } from "../../services/api";
 import { Table, Row } from "./PatientTable.style";
 import type { PatientRecord } from "../../types/patient";

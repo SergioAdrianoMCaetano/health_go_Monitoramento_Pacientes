@@ -5,6 +5,7 @@ export const LayoutContainer = styled.div`
     display: flex;
     flex-direction: column;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    font-family: "Roboto", sans-serif;
 `;
 
 export const Header = styled.header`
