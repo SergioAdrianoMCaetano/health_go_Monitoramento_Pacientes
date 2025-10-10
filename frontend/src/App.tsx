@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AppProvider } from "./context/AppContext";
 import Layout from "./pages/Layout/Layout";
 import HomePage from "./pages/HomePage/HomePage";
-import DashboardPage from "./pages/DashboardPage/DashboardPage";
+import { DashboardPage } from "./pages/DashboardPage/DashboardPage";
 import "../src/main";
 
 function App() {
