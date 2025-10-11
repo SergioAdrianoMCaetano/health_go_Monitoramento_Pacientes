@@ -126,16 +126,19 @@ export default function HomePage() {
 
                 <div style={{ 
                     marginTop: "1.5rem", 
-                    padding: "1rem", 
+                    padding: "0.7rem", 
                     background: "#edf2f7", 
                     borderRadius: "8px",
-                    fontSize: "0.9rem"
+                    fontSize: "0.9rem",
+                    overflowWrap: "break-word",
+                    wordBreak: "break-all"
                 }}>
                     <strong>📝 Formato esperado do CSV:</strong>
                     <br />• Colunas: timestamp, paciente_id, paciente_nome, paciente_cpf, hr, spo2, pressao_sys, pressao_dia, temp, resp_freq, status
+                    <br />
                     <br />• Status: <code>NORMAL</code> ou <code>ALERTA</code>
-                    <br />• Exemplo: <code>20:31:32.81,PAC001,João Silva,123.456.789-09,79.0,95.8,150.0,96.0,36.7,15.53,NORMAL</code>
-                </div>   
+                    <br />• Exemplo: <code style={{whiteSpace: "normal"}}>20:31:32.81,PAC001,João Silva,123.456.789-09,79.0,95.8,150.0,96.0,36.7,15.53,NORMAL</code>
+                </div>  
             </div>
         </HomeContainer>
     );
