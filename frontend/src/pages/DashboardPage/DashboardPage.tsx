@@ -7,9 +7,9 @@ import { api } from "../../services/api";
 
 import type { PatientRecord } from "../../types/patient";
 
-import { PatientTable } from "../../components/PatientTable/PatientTable";
-import { VitalChart } from "../../components/VitalChart/VitalChart";
-import { MapView } from "../../components/MapView/MapView";
+import  PatientTable  from "../../components/PatientTable/PatientTable";
+import VitalChart  from "../../components/VitalChart/VitalChart";
+import MapView from "../../components/MapView/MapView";
 import FileList from "../../components/FileList/FileList";
 import { 
     ChartSection,
@@ -25,11 +25,14 @@ import {
 
 export function DashboardPage() {
     const navigate = useNavigate();
+
     const { state, setPatientData, setUploadedFiles, setLoading, setError } = useApp();
     
     //CONTROLE CENTRALIZADO DE ESTADO
     const hasLoadedPatients = useRef(false);
+
     const hasLoadedFiles = useRef(false);
+
     const isFetching = useRef(false);
 
     //FUNÇÃO ÚNICA PARA CARREGAR ARQUIVOS

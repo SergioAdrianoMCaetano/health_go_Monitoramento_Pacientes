@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { useApp } from "../../hooks/useApp";
 import { Table, Row } from "./PatientTable.style";
 
-export function PatientTable() {
+export default function PatientTable() {
     const { state } = useApp();
 
     // Ordenar por timestamp (do mais recente para o mais antigo)

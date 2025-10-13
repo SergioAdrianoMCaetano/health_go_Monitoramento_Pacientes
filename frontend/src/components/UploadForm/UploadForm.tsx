@@ -3,18 +3,22 @@ import { FormContainer, Button, HiddenInput, FileName } from "./UpLoadForm.style
 import { FaUpload, FaFile } from "react-icons/fa";
 
 interface UploadFormProps {
-    onFileSelect: (file: File | null) => void;
+    onFileSelect?: (file: File | null) => void;
     onUpload: () => void;
     disabled?: boolean;
 }
 
 export default function UploadForm({ onFileSelect, onUpload, disabled = false }: UploadFormProps) {
     const [file, setFile] = useState<File | null>(null);
+    
     const fileInputRef = useRef<HTMLInputElement>(null);
+    
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const selectedFile = event.target.files?.[0] || null;
         setFile(selectedFile);
-        onFileSelect(selectedFile);
+        if (onFileSelect) {
+            onFileSelect(selectedFile);
+        }
     };
 
     const handleUpload = async () => {
