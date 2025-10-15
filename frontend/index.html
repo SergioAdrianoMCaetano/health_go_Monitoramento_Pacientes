@@ -10,7 +10,19 @@
     <title>Dashboard Bora Saúde</title>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root"></div>>
     <script type="module" src="/src/main.tsx"></script>
+
+    <script>
+      console.log('🚀 HealthGo - HTML carregado');
+      // Verifica se Plotly carregou
+      setTimeout(() => {
+        if (window.Plotly) {
+          console.log('✅ Plotly carregado via CDN');
+        } else {
+          console.log('⚠️ Plotly não carregou via CDN');
+        }
+      }, 1000);
+    </script>
   </body>
 </html>
