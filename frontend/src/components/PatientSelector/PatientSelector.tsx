@@ -79,7 +79,7 @@ export default function PatientSelector({
         <Input
             type="text"
             value={query}
-            onChange={(e) => {
+            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                 setQuery(e.target.value);
                 setShowSuggestions(true);
                 setHighlightedIndex(-1);
